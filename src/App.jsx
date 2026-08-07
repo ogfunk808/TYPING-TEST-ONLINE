@@ -7,6 +7,7 @@ import SettingsPanel from './components/SettingsPanel';
 import Leaderboard from './components/Leaderboard';
 import AdSponsor from './components/AdSponsor';
 import VirtualKeyboard from './components/VirtualKeyboard';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import { getWordsForMode } from './utils/textGenerator';
 import { playSound } from './utils/audioSynth';
 import { speak, speakLetter, speakWord, selectVoice, updateVoiceSettings } from './utils/speech';
@@ -53,6 +54,7 @@ export default function App() {
   // Modals
   const [showSettings, setShowSettings] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
   const [newScoreRecord, setNewScoreRecord] = useState(null);
 
   // Caret alignment refs
@@ -70,6 +72,17 @@ export default function App() {
       rate: settings.voiceRate
     });
   }, [settings]);
+
+  // Initialize Google Adsense
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    } catch (e) {
+      console.warn("AdSense push error: ", e);
+    }
+  }, []);
 
   // Restart / Reset typing test
   const resetTest = () => {
@@ -494,11 +507,30 @@ export default function App() {
 
         {/* Sponsor/Ad Section */}
         <AdSponsor soundOn={settings.soundOn} />
+
+        {/* Google AdSense Responsive Banner Slot */}
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: '900px', margin: '1rem auto 0 auto', zIndex: 2, overflow: 'hidden' }}>
+          <ins className="adsbygoogle"
+               style={{ display: 'block', width: '100%', minWidth: '250px', height: '90px' }}
+               data-ad-client="ca-pub-1560865754891276"
+               data-ad-slot="8878909876"
+               data-ad-format="horizontal"
+               data-full-width-responsive="true"></ins>
+        </div>
       </main>
 
       {/* Footer credits */}
       <footer style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '1.5rem', zIndex: 1 }}>
-        <p>© 2026 Typiverse 3D. Sleek WebGL visuals, voice synth assistance, and mechanical clicks for all age typists.</p>
+        <p>
+          © 2026 Typiverse 3D. Sleek WebGL visuals, voice synth assistance, and mechanical clicks for all age typists.
+          <button 
+            className="view-btn" 
+            onClick={() => setShowPrivacy(true)} 
+            style={{ background: 'transparent', border: 'none', color: 'var(--color-primary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.75rem', marginLeft: '10px' }}
+          >
+            Privacy Policy
+          </button>
+        </p>
       </footer>
 
       {/* Settings Modal */}
@@ -523,6 +555,9 @@ export default function App() {
           }} 
         />
       )}
+
+      {/* Privacy Policy Modal */}
+      <PrivacyPolicy isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
     </div>
   );
 }
