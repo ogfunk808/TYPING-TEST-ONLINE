@@ -8,6 +8,7 @@ import Leaderboard from './components/Leaderboard';
 import AdSponsor from './components/AdSponsor';
 import VirtualKeyboard from './components/VirtualKeyboard';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import AdSenseBlock from './components/AdSenseBlock';
 import { getWordsForMode } from './utils/textGenerator';
 import { playSound } from './utils/audioSynth';
 import { speak, speakLetter, speakWord, selectVoice, updateVoiceSettings } from './utils/speech';
@@ -73,16 +74,7 @@ export default function App() {
     });
   }, [settings]);
 
-  // Initialize Google Adsense
-  useEffect(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      }
-    } catch (e) {
-      console.warn("AdSense push error: ", e);
-    }
-  }, []);
+
 
   // Restart / Reset typing test
   const resetTest = () => {
@@ -508,15 +500,8 @@ export default function App() {
         {/* Sponsor/Ad Section */}
         <AdSponsor soundOn={settings.soundOn} />
 
-        {/* Google AdSense Responsive Banner Slot */}
-        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: '900px', margin: '1rem auto 0 auto', zIndex: 2, overflow: 'hidden' }}>
-          <ins className="adsbygoogle"
-               style={{ display: 'block', width: '100%', minWidth: '250px', height: '90px' }}
-               data-ad-client="ca-pub-1560865754891276"
-               data-ad-slot="8878909876"
-               data-ad-format="horizontal"
-               data-full-width-responsive="true"></ins>
-        </div>
+        {/* Google AdSense Area */}
+        <AdSenseBlock />
       </main>
 
       {/* Footer credits */}
