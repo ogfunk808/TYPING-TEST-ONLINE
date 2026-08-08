@@ -42,7 +42,7 @@ export default function AdSenseBlock() {
           ref={insRef}
           className="adsbygoogle"
           style={{ display: 'block', width: '100%', minHeight: '90px' }}
-          data-ad-client="ca-pub-1560865754891276"
+          data-ad-client="ca-pub-5350198706036162"
           data-ad-slot="8878909876"
           data-ad-format="horizontal"
           data-full-width-responsive="true"
@@ -72,7 +72,7 @@ export default function AdSenseBlock() {
                 <span style={{ fontSize: '0.65rem', backgroundColor: 'var(--color-yellow)', color: '#000', padding: '0.15rem 0.35rem', borderRadius: '4px', fontWeight: 800 }}>PENDING</span>
               </div>
               <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '0.15rem' }}>
-                Ad slot configured for <strong>ca-pub-1560865754891276</strong>. Live ads will automatically display here once Google completes verification of <code>typing-test-online-eta.vercel.app</code>.
+                Ad slot configured for <strong>ca-pub-5350198706036162</strong>. Live ads will automatically display here once Google completes verification of <code>typing-test-online-eta.vercel.app</code>.
               </div>
             </div>
           </div>
