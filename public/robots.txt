@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://typing-test-online.vercel.app/sitemap.xml
-Sitemap: https://typing-test-online.vercel.app/sitemap_index.xml
+Sitemap: https://typing-test-online-eta.vercel.app/sitemap.xml
+Sitemap: https://typing-test-online-eta.vercel.app/sitemap_index.xml
