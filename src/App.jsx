@@ -90,6 +90,30 @@ export default function App() {
       setShowHowToUse(true);
     } else if (path.includes('settings')) {
       setShowSettings(true);
+    } else if (path.includes('3d-typewriter')) {
+      setActiveView('3d-typewriter');
+    } else if (path.includes('3d-space')) {
+      setActiveView('3d-space');
+    } else if (path.includes('kids-mode')) {
+      setSettings((prev) => ({ ...prev, ageMode: 'kids', category: 'sentences' }));
+    } else if (path.includes('senior-mode')) {
+      setSettings((prev) => ({ ...prev, ageMode: 'senior' }));
+    } else if (path.includes('classic-mode')) {
+      setSettings((prev) => ({ ...prev, ageMode: 'classic' }));
+    } else if (path.includes('quotes')) {
+      setSettings((prev) => ({ ...prev, category: 'quotes' }));
+    } else if (path.includes('code')) {
+      setSettings((prev) => ({ ...prev, category: 'code' }));
+    } else if (path.includes('words')) {
+      setSettings((prev) => ({ ...prev, category: 'words' }));
+    } else if (path.includes('sentences')) {
+      setSettings((prev) => ({ ...prev, category: 'sentences' }));
+    } else if (path.includes('15-seconds')) {
+      setSettings((prev) => ({ ...prev, duration: 15 }));
+    } else if (path.includes('30-seconds')) {
+      setSettings((prev) => ({ ...prev, duration: 30 }));
+    } else if (path.includes('60-seconds')) {
+      setSettings((prev) => ({ ...prev, duration: 60 }));
     }
 
     // Query param overrides
