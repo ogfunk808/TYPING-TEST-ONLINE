@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Settings, Trophy, RotateCcw, Volume2, VolumeX, Keyboard, Compass } from 'lucide-react';
+import { Settings, Trophy, RotateCcw, Volume2, VolumeX, Keyboard, Compass, HelpCircle } from 'lucide-react';
 import GameCanvas from './components/GameCanvas';
 import TypewriterCanvas from './components/TypewriterCanvas';
 import StatsDashboard from './components/StatsDashboard';
@@ -8,6 +8,7 @@ import Leaderboard from './components/Leaderboard';
 import AdSponsor from './components/AdSponsor';
 import VirtualKeyboard from './components/VirtualKeyboard';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import HowToUseModal from './components/HowToUseModal';
 import AdSenseBlock from './components/AdSenseBlock';
 import { getWordsForMode } from './utils/textGenerator';
 import { playSound } from './utils/audioSynth';
@@ -56,6 +57,7 @@ export default function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showHowToUse, setShowHowToUse] = useState(false);
   const [newScoreRecord, setNewScoreRecord] = useState(null);
 
   // Caret alignment refs
@@ -400,7 +402,11 @@ export default function App() {
             {settings.soundOn ? <Volume2 size={20} /> : <VolumeX size={20} />}
           </button>
 
-          <button className="icon-btn" onClick={() => setShowLeaderboard(true)}>
+          <button className="icon-btn" onClick={() => setShowHowToUse(true)} title="How to Use Guide">
+            <HelpCircle size={20} />
+          </button>
+
+          <button className="icon-btn" onClick={() => setShowLeaderboard(true)} title="Leaderboard">
             <Trophy size={20} />
           </button>
 
@@ -510,6 +516,13 @@ export default function App() {
           © 2026 Typiverse 3D. Sleek WebGL visuals, voice synth assistance, and mechanical clicks for all age typists.
           <button 
             className="view-btn" 
+            onClick={() => setShowHowToUse(true)} 
+            style={{ background: 'transparent', border: 'none', color: 'var(--color-cyan)', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.75rem', marginLeft: '10px' }}
+          >
+            How to Use
+          </button>
+          <button 
+            className="view-btn" 
             onClick={() => setShowPrivacy(true)} 
             style={{ background: 'transparent', border: 'none', color: 'var(--color-primary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.75rem', marginLeft: '10px' }}
           >
@@ -543,6 +556,9 @@ export default function App() {
 
       {/* Privacy Policy Modal */}
       <PrivacyPolicy isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
+
+      {/* How to Use Guide Modal */}
+      <HowToUseModal isOpen={showHowToUse} onClose={() => setShowHowToUse(false)} />
     </div>
   );
 }
