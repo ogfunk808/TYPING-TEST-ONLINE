@@ -2,12 +2,64 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap_index.xml"
+    },
+    {
+      "source": "/sitemap-main.xml",
+      "destination": "/sitemap-main.xml"
+    },
+    {
+      "source": "/sitemap-modes.xml",
+      "destination": "/sitemap-modes.xml"
+    },
+    {
+      "source": "/sitemap-pages.xml",
+      "destination": "/sitemap-pages.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
       "source": "/ads.txt",
       "destination": "/ads.txt"
     },
     {
-      "source": "/(.*)",
+      "source": "/google778c2bfb38b2bf5d.html",
+      "destination": "/google778c2bfb38b2bf5d.html"
+    },
+    {
+      "source": "/((?!api/|.*\\..*).*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
     }
   ]
 }
