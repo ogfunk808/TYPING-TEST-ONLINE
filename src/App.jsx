@@ -76,6 +76,65 @@ export default function App() {
     });
   }, [settings]);
 
+  // URL parameters and pathname routing effect (for SEO & deep linking)
+  useEffect(() => {
+    const path = window.location.pathname.toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+
+    // Pathname routes
+    if (path.includes('privacy-policy')) {
+      setShowPrivacy(true);
+    } else if (path.includes('leaderboard')) {
+      setShowLeaderboard(true);
+    } else if (path.includes('how-to-use')) {
+      setShowHowToUse(true);
+    } else if (path.includes('settings')) {
+      setShowSettings(true);
+    }
+
+    // Query param overrides
+    const urlView = params.get('view');
+    if (urlView === '3d-typewriter' || urlView === '3d-space') {
+      setActiveView(urlView);
+    }
+
+    const urlAgeMode = params.get('ageMode');
+    const urlCategory = params.get('category');
+    const urlDuration = parseInt(params.get('duration'), 10);
+
+    setSettings((prev) => ({
+      ...prev,
+      ...(urlAgeMode && ['classic', 'kids', 'senior'].includes(urlAgeMode) ? { ageMode: urlAgeMode } : {}),
+      ...(urlCategory && ['words', 'quotes', 'code', 'sentences'].includes(urlCategory) ? { category: urlCategory } : {}),
+      ...(urlDuration && [15, 30, 60].includes(urlDuration) ? { duration: urlDuration } : {})
+    }));
+  }, []);
+
+  // Update page title dynamically based on active page/view/mode for SEO
+  useEffect(() => {
+    let title = "Typiverse 3D - High-Fidelity 3D Typing Test & Space Arcade";
+    if (showPrivacy) {
+      title = "Privacy Policy - Typiverse 3D Typing Test";
+    } else if (showLeaderboard) {
+      title = "Global Leaderboard - Typiverse 3D Typing Test";
+    } else if (showHowToUse) {
+      title = "How to Use & Guide - Typiverse 3D Typing Test";
+    } else if (showSettings) {
+      title = "Audio & Game Settings - Typiverse 3D Typing Test";
+    } else if (settings.ageMode === 'kids') {
+      title = "Kids Typing Test & Fun Arcade - Typiverse 3D";
+    } else if (settings.ageMode === 'senior') {
+      title = "Senior Accessibility Typing Test - Typiverse 3D";
+    } else if (activeView === '3d-typewriter') {
+      title = "3D Retro Typewriter Typing Speed Test - Typiverse 3D";
+    } else if (settings.category === 'quotes') {
+      title = "Famous Quotes Speed Typing Test - Typiverse 3D";
+    } else if (settings.category === 'code') {
+      title = "Developer & Code Typing Test - Typiverse 3D";
+    }
+    document.title = title;
+  }, [activeView, settings.ageMode, settings.category, showPrivacy, showLeaderboard, showHowToUse, showSettings]);
+
 
 
   // Restart / Reset typing test
